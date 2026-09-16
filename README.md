@@ -1,2 +1,2 @@
-# TP1DPBO2526C2
+# Tugas Praktikum 1 - Desain Pemrograman Berbasis Objek
 
