@@ -18,8 +18,19 @@ import java.util.Scanner;
  *
  * Semua input dari user divalidasi agar program tidak crash ketika
  * menerima input yang tidak sesuai (error handling).
+ *
+ * FITUR BATAL:
+ * Di setiap prompt input (kecuali menu utama), user bisa mengetik kata
+ * kunci "batal" untuk membatalkan operasi yang sedang berjalan dan
+ * langsung kembali ke tampilan menu utama. Ini diimplementasikan dengan
+ * melempar OperasiDibatalkanException dari method pembaca input
+ * (bacaBaris, bacaAngkaInt, bacaAngkaDouble), yang kemudian ditangkap
+ * satu kali saja di method main().
  */
-public class Main {
+public class BioskopApp {
+
+    // Kata kunci yang dipakai user untuk membatalkan operasi yang sedang berjalan.
+    private static final String KATA_BATAL = "batal";
 
     // List untuk menyimpan seluruh objek Film yang sudah ditambahkan.
     private static List<Film> daftarFilm = new ArrayList<>();
@@ -39,29 +50,37 @@ public class Main {
             tampilkanMenu();
             int pilihan = bacaPilihanMenu(); // sudah termasuk error handling input non-angka
 
-            switch (pilihan) {
-                case 1:
-                    tambahFilm();
-                    break;
-                case 2:
-                    tampilkanSemuaFilm();
-                    break;
-                case 3:
-                    updateFilm();
-                    break;
-                case 4:
-                    hapusFilm();
-                    break;
-                case 5:
-                    cariFilm();
-                    break;
-                case 6:
-                    berjalan = false;
-                    System.out.println("Program selesai. Terima kasih!");
-                    break;
-                default:
-                    // Error handling: pilihan menu di luar rentang 1-6
-                    System.out.println("Pilihan tidak valid! Silakan pilih menu 1-6.");
+            // try-catch di sini menangkap OperasiDibatalkanException dari
+            // fitur manapun (tambah/update/hapus/cari), sehingga jika user
+            // mengetik "batal" di tengah proses input, program otomatis
+            // kembali ke menu utama tanpa menyelesaikan operasi tersebut.
+            try {
+                switch (pilihan) {
+                    case 1:
+                        tambahFilm();
+                        break;
+                    case 2:
+                        tampilkanSemuaFilm();
+                        break;
+                    case 3:
+                        updateFilm();
+                        break;
+                    case 4:
+                        hapusFilm();
+                        break;
+                    case 5:
+                        cariFilm();
+                        break;
+                    case 6:
+                        berjalan = false;
+                        System.out.println("Program selesai. Terima kasih!");
+                        break;
+                    default:
+                        // Error handling: pilihan menu di luar rentang 1-6
+                        System.out.println("Pilihan tidak valid! Silakan pilih menu 1-6.");
+                }
+            } catch (OperasiBatal e) {
+                System.out.println("\n" + e.getMessage() + " Kembali ke menu utama.");
             }
         }
 
@@ -77,6 +96,7 @@ public class Main {
         System.out.println("4. Hapus Film");
         System.out.println("5. Cari Film");
         System.out.println("6. Keluar");
+        System.out.println("(Ketik 'batal' pada prompt input kapan saja untuk kembali ke menu ini)");
         System.out.print("Pilih menu: ");
     }
 
@@ -105,8 +125,7 @@ public class Main {
         // Error handling: ID tidak boleh kosong dan tidak boleh duplikat
         String id;
         while (true) {
-            System.out.print("ID Film (contoh: F003): ");
-            id = scanner.nextLine().trim();
+            id = bacaBaris("ID Film (contoh: F003): ");
 
             if (id.isEmpty()) {
                 System.out.println("ID tidak boleh kosong!");
@@ -122,8 +141,7 @@ public class Main {
         // Error handling: judul tidak boleh kosong
         String judul;
         do {
-            System.out.print("Judul Film: ");
-            judul = scanner.nextLine().trim();
+            judul = bacaBaris("Judul Film: ");
             if (judul.isEmpty()) {
                 System.out.println("Judul tidak boleh kosong!");
             }
@@ -132,8 +150,7 @@ public class Main {
         // Error handling: genre tidak boleh kosong
         String genre;
         do {
-            System.out.print("Genre: ");
-            genre = scanner.nextLine().trim();
+            genre = bacaBaris("Genre: ");
             if (genre.isEmpty()) {
                 System.out.println("Genre tidak boleh kosong!");
             }
@@ -145,8 +162,7 @@ public class Main {
         // Error handling: sutradara tidak boleh kosong
         String sutradara;
         do {
-            System.out.print("Sutradara: ");
-            sutradara = scanner.nextLine().trim();
+            sutradara = bacaBaris("Sutradara: ");
             if (sutradara.isEmpty()) {
                 System.out.println("Nama sutradara tidak boleh kosong!");
             }
@@ -184,9 +200,7 @@ public class Main {
             return;
         }
 
-        System.out.print("Masukkan ID film yang ingin diupdate: ");
-        String id = scanner.nextLine().trim();
-
+        String id = bacaBaris("Masukkan ID film yang ingin diupdate: ");
         Film film = cariFilmById(id);
 
         // Error handling: ID tidak ditemukan
@@ -198,20 +212,17 @@ public class Main {
         System.out.println("Data film ditemukan, silakan masukkan data baru.");
         System.out.println("(Kosongkan/tekan Enter jika tidak ingin mengubah field tersebut)");
 
-        System.out.print("Judul baru [" + film.getJudul() + "]: ");
-        String judul = scanner.nextLine().trim();
+        String judul = bacaBaris("Judul baru [" + film.getJudul() + "]: ");
         if (!judul.isEmpty()) {
             film.setJudul(judul);
         }
 
-        System.out.print("Genre baru [" + film.getGenre() + "]: ");
-        String genre = scanner.nextLine().trim();
+        String genre = bacaBaris("Genre baru [" + film.getGenre() + "]: ");
         if (!genre.isEmpty()) {
             film.setGenre(genre);
         }
 
-        System.out.print("Durasi baru (menit) [" + film.getDurasi() + "]: ");
-        String durasiStr = scanner.nextLine().trim();
+        String durasiStr = bacaBaris("Durasi baru (menit) [" + film.getDurasi() + "]: ");
         if (!durasiStr.isEmpty()) {
             try {
                 int durasiBaru = Integer.parseInt(durasiStr);
@@ -227,14 +238,12 @@ public class Main {
             }
         }
 
-        System.out.print("Sutradara baru [" + film.getSutradara() + "]: ");
-        String sutradara = scanner.nextLine().trim();
+        String sutradara = bacaBaris("Sutradara baru [" + film.getSutradara() + "]: ");
         if (!sutradara.isEmpty()) {
             film.setSutradara(sutradara);
         }
 
-        System.out.print("Harga tiket baru [" + film.getHargaTiket() + "]: ");
-        String hargaStr = scanner.nextLine().trim();
+        String hargaStr = bacaBaris("Harga tiket baru [" + film.getHargaTiket() + "]: ");
         if (!hargaStr.isEmpty()) {
             try {
                 double hargaBaru = Double.parseDouble(hargaStr);
@@ -260,9 +269,7 @@ public class Main {
             return;
         }
 
-        System.out.print("Masukkan ID film yang ingin dihapus: ");
-        String id = scanner.nextLine().trim();
-
+        String id = bacaBaris("Masukkan ID film yang ingin dihapus: ");
         Film film = cariFilmById(id);
 
         // Error handling: ID tidak ditemukan
@@ -272,8 +279,7 @@ public class Main {
         }
 
         // Konfirmasi sebelum menghapus (mencegah penghapusan tidak sengaja)
-        System.out.print("Yakin ingin menghapus '" + film.getJudul() + "'? (y/n): ");
-        String konfirmasi = scanner.nextLine().trim().toLowerCase();
+        String konfirmasi = bacaBaris("Yakin ingin menghapus '" + film.getJudul() + "'? (y/n): ").toLowerCase();
 
         if (konfirmasi.equals("y")) {
             daftarFilm.remove(film);
@@ -292,9 +298,7 @@ public class Main {
             return;
         }
 
-        System.out.print("Masukkan ID film yang dicari: ");
-        String id = scanner.nextLine().trim();
-
+        String id = bacaBaris("Masukkan ID film yang dicari: ");
         Film film = cariFilmById(id);
 
         // Error handling: ID tidak ditemukan
@@ -323,7 +327,29 @@ public class Main {
     }
 
     /**
+     * Membaca satu baris input teks dari user, sekaligus menjadi "gerbang"
+     * pengecekan fitur batal: jika user mengetik "batal" (tanpa memandang
+     * huruf besar/kecil), method ini akan melempar OperasiDibatalkanException
+     * yang otomatis menghentikan fitur yang sedang berjalan dan mengembalikan
+     * user ke menu utama.
+     *
+     * Semua pembacaan input teks pada class ini (ID, judul, genre, sutradara,
+     * konfirmasi hapus, dsb) wajib melalui method ini agar fitur batal
+     * konsisten berlaku di seluruh prompt.
+     */
+    private static String bacaBaris(String label) {
+        System.out.print(label);
+        String input = scanner.nextLine().trim();
+
+        if (input.equalsIgnoreCase(KATA_BATAL)) {
+            throw new OperasiBatal();
+        }
+        return input;
+    }
+
+    /**
      * Membaca input angka bulat (int) dari user dengan validasi:
+     * - Bisa dibatalkan dengan mengetik "batal" (lihat bacaBaris)
      * - Harus berupa angka (menangkap NumberFormatException)
      * - Jika parameter wajibPositif = true, nilai harus lebih besar dari 0
      * Method ini akan terus meminta input sampai user memasukkan nilai yang valid.
@@ -331,8 +357,7 @@ public class Main {
     private static int bacaAngkaInt(String label, boolean wajibPositif) {
         int nilai;
         while (true) {
-            System.out.print(label);
-            String input = scanner.nextLine().trim();
+            String input = bacaBaris(label); // sudah termasuk pengecekan kata "batal"
             try {
                 nilai = Integer.parseInt(input);
                 if (wajibPositif && nilai <= 0) {
@@ -349,14 +374,14 @@ public class Main {
 
     /**
      * Membaca input angka desimal (double) dari user dengan validasi:
+     * - Bisa dibatalkan dengan mengetik "batal" (lihat bacaBaris)
      * - Harus berupa angka (menangkap NumberFormatException)
-     * - Jika parameter tidakBolehNegatif = false, nilai negatif ditolak
+     * - Jika parameter bolehNegatif = false, nilai negatif ditolak
      */
     private static double bacaAngkaDouble(String label, boolean bolehNegatif) {
         double nilai;
         while (true) {
-            System.out.print(label);
-            String input = scanner.nextLine().trim();
+            String input = bacaBaris(label); // sudah termasuk pengecekan kata "batal"
             try {
                 nilai = Double.parseDouble(input);
                 if (!bolehNegatif && nilai < 0) {
