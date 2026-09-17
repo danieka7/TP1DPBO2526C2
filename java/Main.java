@@ -27,7 +27,7 @@ import java.util.Scanner;
  * (bacaBaris, bacaAngkaInt, bacaAngkaDouble), yang kemudian ditangkap
  * satu kali saja di method main().
  */
-public class BioskopApp {
+public class Main {
 
     // Kata kunci yang dipakai user untuk membatalkan operasi yang sedang berjalan.
     private static final String KATA_BATAL = "batal";
