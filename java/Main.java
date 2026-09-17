@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Class BioskopApp
+ * Class Main
  * -----------------
  * Class ini adalah program utama (entry point) yang mengelola sekumpulan
  * objek Film menggunakan ArrayList (implementasi dari List of Object).
@@ -16,8 +16,6 @@ import java.util.Scanner;
  * 4. Hapus Data (berdasarkan ID)
  * 5. Cari Data (berdasarkan ID)
  *
- * Semua input dari user divalidasi agar program tidak crash ketika
- * menerima input yang tidak sesuai (error handling).
  *
  * FITUR BATAL:
  * Di setiap prompt input (kecuali menu utama), user bisa mengetik kata
@@ -89,13 +87,16 @@ public class Main {
 
     // ==================== TAMPILAN MENU ====================
     private static void tampilkanMenu() {
-        System.out.println("\n==== MENU BIOSKOP ====");
-        System.out.println("1. Tambah Film");
-        System.out.println("2. Tampilkan Semua Film");
-        System.out.println("3. Update Film");
-        System.out.println("4. Hapus Film");
-        System.out.println("5. Cari Film");
-        System.out.println("6. Keluar");
+        System.out.println("===============================");
+        System.out.println("==== BIOSKOP SINEFIL ABIEZ ====");
+        System.out.println("===============================");
+        System.out.println("|| 1. Tambah Film            ||");
+        System.out.println("|| 2. Tampilkan Semua Film   ||");
+        System.out.println("|| 3. Update Film            ||");
+        System.out.println("|| 4. Hapus Film             ||");
+        System.out.println("|| 5. Cari Film              ||");
+        System.out.println("|| 6. Keluar                 ||");
+        System.out.println("===============================");
         System.out.println("(Ketik 'batal' pada prompt input kapan saja untuk kembali ke menu ini)");
         System.out.print("Pilih menu: ");
     }
