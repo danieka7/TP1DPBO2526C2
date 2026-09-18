@@ -47,71 +47,58 @@ class Film {
 
     // ==================== GETTER ====================
     // Getter digunakan untuk mengambil nilai tiap atribut dari luar class.
-    public function getId(): string
-    {
+    public function getId(): string{
         return $this->id;
     }
 
-    public function getJudul(): string
-    {
+    public function getJudul(): string{
         return $this->judul;
     }
 
-    public function getGenre(): string
-    {
+    public function getGenre(): string{
         return $this->genre;
     }
 
-    public function getDurasi(): int
-    {
+    public function getDurasi(): int{
         return $this->durasi;
     }
 
-    public function getSutradara(): string
-    {
+    public function getSutradara(): string{
         return $this->sutradara;
     }
 
-    public function getHargaTiket(): float
-    {
+    public function getHargaTiket(): float{
         return $this->hargaTiket;
     }
 
-    public function getGambar(): string
-    {
+    public function getGambar(): string{
         return $this->gambar;
     }
 
     // ==================== SETTER ====================
     // Setter digunakan agar fitur "Update Data" bisa mengubah nilai atribut
     // objek Film yang sudah ada tanpa perlu membuat objek baru.
-    public function setJudul(string $judul): void
-    {
+    public function setJudul(string $judul): void{
         $this->judul = $judul;
     }
 
-    public function setGenre(string $genre): void
-    {
+    public function setGenre(string $genre): void{
         $this->genre = $genre;
     }
 
-    public function setDurasi(int $durasi): void
-    {
+    public function setDurasi(int $durasi): void{
         $this->durasi = $durasi;
     }
 
-    public function setSutradara(string $sutradara): void
-    {
+    public function setSutradara(string $sutradara): void{
         $this->sutradara = $sutradara;
     }
 
-    public function setHargaTiket(float $hargaTiket): void
-    {
+    public function setHargaTiket(float $hargaTiket): void{
         $this->hargaTiket = $hargaTiket;
     }
 
-    public function setGambar(string $gambar): void
-    {
+    public function setGambar(string $gambar): void{
         $this->gambar = $gambar;
     }
 }

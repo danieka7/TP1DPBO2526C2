@@ -1,13 +1,5 @@
 <?php
-/**
- * main.php
- * ----------
- * Halaman utama aplikasi Bioskop (versi Web).
- *
- * Karena dilarang menggunakan database, seluruh data film disimpan di
- * $_SESSION selama browser/session user masih aktif. Setiap objek Film
- * disimpan sebagai instance dari class Film (lihat Film.php).
- *
+/*
  * Alur program (berbasis parameter GET/POST "action"):
  * - action=tambah   (POST) -> menambah film baru
  * - action=update   (POST) -> mengubah data film berdasarkan ID
@@ -29,7 +21,7 @@ session_start();
 // Error handling: cek dulu apakah session sudah pernah diisi sebelumnya,
 // agar tidak muncul error "undefined array key" saat pertama kali dibuka.
 if (!isset($_SESSION['daftarFilm'])) {
-    // Data awal (opsional) supaya halaman tidak kosong saat pertama dibuka.
+    // Data awal supaya halaman tidak kosong saat pertama dibuka.
     $_SESSION['daftarFilm'] = [
         new Film("F001", "The Dark Knight", "Action", 152, "Christopher Nolan", 45000, ""),
         new Film("F002", "Interstellar", "Sci-Fi", 169, "Christopher Nolan", 50000, ""),
@@ -53,7 +45,7 @@ if (!is_dir($folderUpload)) {
 // Ekstensi file gambar yang diizinkan (error handling upload gambar).
 $ekstensiDiizinkan = ['jpg', 'jpeg', 'png', 'gif'];
 
-/**
+/*
  * Fungsi bantu: mencari objek Film di dalam $_SESSION['daftarFilm']
  * berdasarkan ID. Mengembalikan null jika tidak ditemukan.
  * Dipakai untuk fitur Update, Hapus, dan pengecekan ID duplikat.
@@ -67,7 +59,7 @@ function cariFilmById(string $id): ?Film{
     return null;
 }
 
-/**
+/*
  * Fungsi bantu: memproses upload file gambar.
  * Mengembalikan path lokal (string) jika berhasil, atau string kosong
  * jika user tidak mengunggah file apa pun.
@@ -245,7 +237,7 @@ $kataKunciCari = trim($_GET['keyword'] ?? '');
 // untuk mengisi (prefill) form secara otomatis.
 $filmUntukEdit = $idSedangDiedit !== "" ? cariFilmById($idSedangDiedit) : null;
 
-/**
+/*
  * Fungsi bantu untuk menampilkan data dengan aman ke HTML (mencegah XSS).
  * Semua data dari user WAJIB melalui fungsi ini sebelum dicetak ke halaman.
  */
@@ -259,7 +251,7 @@ function aman(string $teks): string
 
 <head>
     <meta charset="UTF-8">
-    <title>Sistem Data Bioskop</title>
+    <title>Bioskop Sinefil ABiez</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -402,7 +394,7 @@ function aman(string $teks): string
 
 <body>
 
-<h1>🎬 Sistem Data Bioskop</h1>
+<h1>🎬 BIOSKOP SINEFIL ABIEZ 🎬</h1>
 
 <?php if ($pesan !== ""): ?>
     <div class="pesan-sukses"><?= aman($pesan) ?></div>

@@ -120,8 +120,9 @@ void tambahFilm() {
     // Error handling: harga tiket harus angka dan tidak boleh negatif
     double harga = bacaAngkaDouble("Harga Tiket: ", false);
 
-    // Film* filmBaru = new Film(id, judul, genre, durasi, sutradara, harga);
-    // daftarFilm.push_back(filmBaru);
+    Film* filmBaru = new Film(id, judul, genre, durasi, sutradara, harga);
+    // menambahkan data yang baru ditambahkan ke memori
+    daftarFilm.push_back(filmBaru);
     cout << "Film berhasil ditambahkan!\n";
 }
 
@@ -277,11 +278,6 @@ void cariFilm() {
 
 // Mengubah seluruh huruf pada string menjadi huruf kecil.
 // Dipakai untuk perbandingan tanpa memandang besar/kecil huruf
-// (padanan .equalsIgnoreCase() / .toLowerCase() di Java).
-// Catatan: parameter "const string&" diubah menjadi "string" (by value)
-// karena "const" dihapus. Tanpa "const", parameter bertipe reference
-// (string&) tidak bisa menerima nilai sementara seperti hasil
-// film->getId(), sehingga parameter harus disalin (by value).
 string toLowerStr(string s) {
     string hasil = s;
     transform(hasil.begin(), hasil.end(), hasil.begin(), ::tolower);
@@ -307,10 +303,6 @@ Film* cariFilmById(string id) {
  * pengecekan fitur batal: jika user mengetik "batal" (tanpa memandang
  * huruf besar/kecil), fungsi ini akan melempar OperasiBatal yang otomatis
  * menghentikan fitur yang sedang berjalan dan mengembalikan user ke menu utama.
- *
- * Semua pembacaan input teks pada file ini (ID, judul, genre, sutradara,
- * konfirmasi hapus, dsb) wajib melalui fungsi ini agar fitur batal
- * konsisten berlaku di seluruh prompt.
  */
 string bacaBaris(string label) {
     cout << label;

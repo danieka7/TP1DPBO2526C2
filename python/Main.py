@@ -1,23 +1,3 @@
-"""
-Module main.py
-----------------
-Program utama yang mengelola sekumpulan objek Film menggunakan list Python
-(implementasi dari List of Object) melalui menu CLI interaktif.
-
-Fitur:
-1. Tambah Data
-2. Tampilkan Data
-3. Update Data (berdasarkan ID)
-4. Hapus Data (berdasarkan ID)
-5. Cari Data (berdasarkan ID)
-
-FITUR BATAL:
-Di setiap prompt input, user bisa mengetik "batal" untuk membatalkan
-operasi yang sedang berjalan dan kembali ke menu utama. Ini dilakukan
-dengan melempar OperasiDibatalkanException dari fungsi pembaca input,
-yang kemudian ditangkap satu kali saja di dalam loop menu utama.
-"""
-
 from typing import Optional
 
 from Film import Film
@@ -279,10 +259,6 @@ def baca_baris(label: str) -> str:
     huruf besar/kecil), fungsi ini akan melempar OperasiDibatalkanException
     yang otomatis menghentikan fitur yang sedang berjalan dan mengembalikan
     user ke menu utama.
-
-    Semua pembacaan input teks pada program ini (ID, judul, genre,
-    sutradara, konfirmasi hapus, dsb) wajib melalui fungsi ini agar fitur
-    batal konsisten berlaku di seluruh prompt.
     """
     input_user = input(label).strip()
     if input_user.lower() == KATA_BATAL:

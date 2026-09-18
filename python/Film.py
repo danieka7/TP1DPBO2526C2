@@ -1,14 +1,3 @@
-"""
-Module film.py
-----------------
-Berisi class Film yang merepresentasikan data sebuah film yang tayang
-di bioskop. Class ini berfungsi sebagai "data holder": menyimpan atribut
-film beserta getter/setter-nya. Logika Tambah/Update/Hapus/Cari dikelola
-oleh program utama (main.py) yang menyimpan sekumpulan objek Film dalam
-sebuah list (list of object).
-"""
-
-
 class Film:
     """Class Film — merepresentasikan satu data film di bioskop."""
 
