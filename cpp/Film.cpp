@@ -9,10 +9,6 @@ using namespace std;
  * Setiap objek Film menyimpan informasi berupa id, judul, genre, durasi,
  * sutradara, dan harga tiket.
  *
- * Class ini murni sebagai "data holder" (menyimpan data + getter/setter),
- * sedangkan logika tambah/hapus/update/cari ditangani oleh Main.cpp
- * yang mengelola kumpulan objek Film dalam sebuah std::vector.
- *
  */
 
 class Film {
@@ -31,7 +27,7 @@ public:
     // Constructor untuk membuat objek Film baru dengan seluruh atributnya.
     // Memakai initializer list (lebih efisien dibanding assignment di dalam body).
     
-    // konstrukor kosnong
+    // konstrukor kosong
     Film (){
         this->id = "";
         this->judul = "";
@@ -94,9 +90,6 @@ public:
     // ==================== METHOD TAMBAHAN ====================
     // Menampilkan seluruh informasi film dalam format yang rapi,
     // termasuk memformat harga tiket dengan pemisah ribuan (mis: Rp45.000).
-    // Catatan: kata kunci "const" pada method ini sudah dihapus sesuai
-    // permintaan, sehingga method ini sekarang boleh mengubah atribut
-    // objek (walau pada praktiknya method ini tidak mengubah apa pun).
     void tampilkanInfo() {
         string hargaStr = to_string(static_cast<long long>(hargaTiket));
         string hargaFormatted;

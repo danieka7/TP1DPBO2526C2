@@ -8,28 +8,6 @@
 
 using namespace std;
 
-/*
- * Main.cpp
- * -----------------
- * File ini adalah program utama (entry point) yang mengelola sekumpulan
- * objek Film menggunakan std::vector (padanan ArrayList di Java).
- *
- * Fitur yang disediakan:
- * 1. Tambah Data
- * 2. Tampilkan Data
- * 3. Update Data (berdasarkan ID)
- * 4. Hapus Data (berdasarkan ID)
- * 5. Cari Data (berdasarkan ID)
- *
- * FITUR BATAL:
- * Di setiap prompt input (kecuali menu utama), user bisa mengetik kata
- * kunci "batal" untuk membatalkan operasi yang sedang berjalan dan
- * langsung kembali ke tampilan menu utama. Ini diimplementasikan dengan
- * melempar exception OperasiBatal dari fungsi pembaca input
- * (bacaBaris, bacaAngkaInt, bacaAngkaDouble), yang kemudian ditangkap
- * satu kali saja di fungsi main().
- */
-
 // Kata kunci yang dipakai user untuk membatalkan operasi yang sedang berjalan.
 // (const dihapus -> sekarang variabel biasa, bukan konstanta)
 string KATA_BATAL = "batal";
@@ -55,17 +33,17 @@ string toLowerStr(string s);
 
 // ==================== TAMPILAN MENU ====================
 void tampilkanMenu() {
-    cout << "===============================\n";
-    cout << "==== BIOSKOP SINEFIL ABIEZ ====\n";
-    cout << "===============================\n";
-    cout << "|| 1. Tambah Film            ||\n";
-    cout << "|| 2. Tampilkan Semua Film   ||\n";
-    cout << "|| 3. Update Film            ||\n";
-    cout << "|| 4. Hapus Film             ||\n";
-    cout << "|| 5. Cari Film              ||\n";
-    cout << "|| 6. Keluar                 ||\n";
-    cout << "===============================\n";
-    cout << "(Ketik 'batal' pada prompt input kapan saja untuk kembali ke menu ini)\n";
+    cout << "========================================\n";
+    cout << "|| ----- BIOSKOP SINEFIL ABIEZ ------ ||\n";
+    cout << "========================================\n";
+    cout << "|| 1. Tambah Film                     ||\n";
+    cout << "|| 2. Tampilkan Semua Film            ||\n";
+    cout << "|| 3. Update Film                     ||\n";
+    cout << "|| 4. Hapus Film                      ||\n";
+    cout << "|| 5. Cari Film                       ||\n";
+    cout << "|| 6. Keluar                          ||\n";
+    cout << "========================================\n";
+    cout << "(Ketik 'batal' pada input kapan saja untuk kembali ke menu ini)\n";
     cout << "Pilih menu: ";
 }
 

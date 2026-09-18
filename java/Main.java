@@ -87,18 +87,18 @@ public class Main {
 
     // ==================== TAMPILAN MENU ====================
     private static void tampilkanMenu() {
-        System.out.println("===============================");
-        System.out.println("==== BIOSKOP SINEFIL ABIEZ ====");
-        System.out.println("===============================");
-        System.out.println("|| 1. Tambah Film            ||");
-        System.out.println("|| 2. Tampilkan Semua Film   ||");
-        System.out.println("|| 3. Update Film            ||");
-        System.out.println("|| 4. Hapus Film             ||");
-        System.out.println("|| 5. Cari Film              ||");
-        System.out.println("|| 6. Keluar                 ||");
-        System.out.println("===============================");
-        System.out.println("(Ketik 'batal' pada prompt input kapan saja untuk kembali ke menu ini)");
-        System.out.print("Pilih menu: ");
+        System.out.println("========================================");
+        System.out.println("|| ----- BIOSKOP SINEFIL ABIEZ ------ ||");
+        System.out.println("========================================");
+        System.out.println("|| 1. Tambah Film                     ||");
+        System.out.println("|| 2. Tampilkan Semua Film            ||");
+        System.out.println("|| 3. Update Film                     ||");
+        System.out.println("|| 4. Hapus Film                      ||");
+        System.out.println("|| 5. Cari Film                       ||");
+        System.out.println("|| 6. Keluar                          ||");
+        System.out.println("========================================");
+        System.out.println("(Ketik 'batal' pada input kapan saja untuk kembali ke menu ini)");
+        System.out.print(">> Pilih menu: ");
     }
 
     /**

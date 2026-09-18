@@ -4,10 +4,6 @@
  * Class ini merepresentasikan data sebuah film yang tayang di bioskop.
  * Setiap objek Film menyimpan informasi berupa id, judul, genre, durasi,
  * sutradara, dan harga tiket.
- *
- * Class ini murni sebagai "data holder" (menyimpan data + getter/setter),
- * sedangkan logika tambah/hapus/update/cari akan ditangani oleh class lain
- * (BioskopApp.java) yang mengelola kumpulan objek Film dalam sebuah List.
  */
 public class Film {
 
@@ -20,9 +16,7 @@ public class Film {
     private double hargaTiket;  // Harga tiket film dalam Rupiah
 
     // ==================== CONSTRUCTOR ====================
-    /**
-     * Constructor untuk membuat objek Film baru dengan seluruh atributnya.
-     */
+    //  Constructor untuk membuat objek Film baru dengan seluruh atributnya.
     public Film(String id, String judul, String genre, int durasi, String sutradara, double hargaTiket) {
         this.id = id;
         this.judul = judul;
